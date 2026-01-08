@@ -16,7 +16,8 @@ Ce dépôt contient le code source de [MILMO_crm].
 **_Court terme:**
 - [ Digitaliser la gestion des membres]
 - [ Digitaliser l'accueil des membres]
-*_Long terme:**
+  
+**_Long terme:**
 - [Faciliter l'accès aux enseignements et replays des cultes]
 - [Permettre les dons et contributions en ligne]
 
