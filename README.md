@@ -13,6 +13,7 @@ La **Mission Internationale Lumière du Monde (MILMO)** est une organisation rel
 Ce dépôt contient le code source de [MILMO_crm]. 
 
 **Objectifs :**
+
 **_Court terme:**
 - [ Digitaliser la gestion des membres]
 - [ Digitaliser l'accueil des membres]
