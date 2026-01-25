@@ -1,4 +1,14 @@
 {
+  "rewrites": [
+    {
+      "source": "/form_example.html",
+      "destination": "/form_example.html"
+    },
+    {
+      "source": "/form_example",
+      "destination": "/form_example.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
