@@ -1,23 +1,11 @@
 {
-  "rewrites": [
+  "version": 2,
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
     {
-      "source": "/form_example.html",
-      "destination": "/form_example.html"
-    },
-    {
-      "source": "/form_example",
-      "destination": "/form_example.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/html; charset=utf-8"
-        }
-      ]
+      "handle": "filesystem"
     }
   ]
 }
