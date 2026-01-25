@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription MILMO - Grâce Inarrêtable</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f0f0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #e67e22 0%, #f39c12 50%, #e67e22 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+        }
+
+        .logo-badge {
+            background: #ffd700;
+            border: 3px solid white;
+            border-radius: 15px;
+            padding: 8px 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .logo-image {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Carte de formulaire */
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .form-card h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        /* Barre de progression */
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .progress-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .progress-label {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .progress-label.active {
+            color: #0066cc;
+            font-weight: 600;
+        }
+
+        .progress-bar-bg {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: #0066cc;
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        .step-description {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .required-label {
+            color: #e74c3c;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        /* Champs de formulaire */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background: #fafafa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #0066cc;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: #999;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Upload photo */
+        .photo-upload {
+            text-align: center;
+            padding: 30px;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 2px dashed #d0d0d0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .photo-upload:hover {
+            border-color: #0066cc;
+            background: #f5f8ff;
+        }
+
+        .photo-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px dashed #d0d0d0;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            position: relative;
+        }
+
+        .photo-icon {
+            font-size: 50px;
+            color: #999;
+        }
+
+        .add-photo-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: #0066cc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+        }
+
+        .photo-upload-text {
+            color: #888;
+            font-size: 14px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Sélecteur de code pays */
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .country-code {
+            width: 120px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: #fafafa;
+            font-size: 15px;
+        }
+
+        .flag {
+            font-size: 24px;
+        }
+
+        .phone-input {
+            flex: 1;
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-group:hover {
+            background: #e8f4ff;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #0066cc;
+            margin-top: 2px;
+        }
+
+        .checkbox-label {
+            flex: 1;
+        }
+
+        .checkbox-label strong {
+            display: block;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+
+        .checkbox-label small {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Boutons */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 16px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #0066cc;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f5f5;
+            border-color: #0066cc;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #0066cc;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        }
+
+        .btn-success {
+            background: #0066cc;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-success:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+        }
+
+        /* Section avec icône */
+        .section-with-icon {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .section-icon {
+            font-size: 28px;
+            color: #0066cc;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .footer p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .footer small {
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .form-card h2 {
+                font-size: 26px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <div class="header">
+            <div class="logo-badge">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" alt="MILMO Logo" class="logo-image">
+                MILMO
+            </div>
+            <h1>Grâce Inarrêtable</h1>
+        </div>
+
+        <!-- Formulaire -->
+        <form id="inscriptionForm" class="form-card fade-in">
+            <h2>Inscription MILMO</h2>
+
+            <!-- Barre de progression -->
+            <div class="progress-container">
+                <div class="progress-step">
+                    <div class="progress-label" id="stepLabel">Étape <span id="currentStep">1</span> sur 4</div>
+                </div>
+                <div class="progress-step" style="flex: 2;">
+                    <div class="progress-label active" id="stepTitle">Informations Personnelles</div>
+                </div>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar" style="width: 25%;"></div>
+            </div>
+
+            <p class="step-description" id="stepDescription">
+                Veuillez renseigner vos informations de base pour commencer votre inscription.
+            </p>
+
+            <span class="required-label">* Obligatoire</span>
+
+            <!-- Étape 1: Informations Personnelles -->
+            <div id="step1" class="step-content">
+                <!-- Photo de profil -->
+                <div class="form-group">
+                    <label>Photo de profil</label>
+                    <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+                        <div class="photo-circle">
+                            <span class="photo-icon">📷</span>
+                            <div class="add-photo-btn">+</div>
+                        </div>
+                        <p class="photo-upload-text">Appuyez pour ajouter une photo</p>
+                    </div>
+                    <input type="file" id="photoInput" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="nom">Nom complet <span class="required">*</span></label>
+                    <input type="text" id="nom" name="nom" class="form-control" placeholder="Entrez votre nom complet" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prenom">Prénom <span class="required">*</span></label>
+                    <input type="text" id="prenom" name="prenom" class="form-control" placeholder="Entrez votre prénom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Code</label>
+                    <div class="phone-group">
+                        <div class="country-code">
+                            <span class="flag">🇧🇯</span>
+                            <span>+229</span>
+                        </div>
+                        <input type="tel" id="phone" name="phone" class="form-control phone-input" placeholder="Numéro de téléphone" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 2: Contact & Localisation -->
+            <div id="step2" class="step-content" style="display: none;">
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="exemple@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adresse">Adresse <span class="required">*</span></label>
+                    <input type="text" id="adresse" name="adresse" class="form-control" placeholder="Votre adresse complète" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ville">Ville <span class="required">*</span></label>
+                    <input type="text" id="ville" name="ville" class="form-control" placeholder="Ex: Cotonou" required>
+                </div>
+            </div>
+
+            <!-- Étape 3: Informations spirituelles (exemple) -->
+            <div id="step3" class="step-content" style="display: none;">
+                <div class="form-group">
+                    <label for="dateNaissance">Date de naissance <span class="required">*</span></label>
+                    <input type="date" id="dateNaissance" name="dateNaissance" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="profession">Profession</label>
+                    <input type="text" id="profession" name="profession" class="form-control" placeholder="Votre profession">
+                </div>
+
+                <div class="form-group">
+                    <label for="situationMatrimoniale">Situation matrimoniale</label>
+                    <select id="situationMatrimoniale" name="situationMatrimoniale" class="form-control">
+                        <option value="">Sélectionnez...</option>
+                        <option value="celibataire">Célibataire</option>
+                        <option value="marie">Marié(e)</option>
+                        <option value="divorce">Divorcé(e)</option>
+                        <option value="veuf">Veuf/Veuve</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Étape 4: Confirmation -->
+            <div id="step4" class="step-content" style="display: none;">
+                <p class="step-description">
+                    Dernière étape ! Vous pouvez nous laisser une intention de prière avant de finaliser votre inscription.
+                </p>
+
+                <p style="color: #666; font-weight: 600; margin-bottom: 15px;">Informations complémentaires</p>
+
+                <div class="section-with-icon">
+                    <div class="section-header">
+                        <span class="section-icon">🙏</span>
+                        <span class="section-title">Besoin de prière particulier ?</span>
+                    </div>
+                    <textarea id="priere" name="priere" class="form-control" placeholder="Partagez votre requête ici (optionnel)..." style="background: white;"></textarea>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter" class="checkbox-label">
+                        <strong>J'accepte de recevoir les communications de la MILMO</strong>
+                        <small>Restez informé(e) de nos actualités et événements.</small>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Boutons de navigation -->
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;" onclick="changeStep(-1)">
+                    ← Précédent
+                </button>
+                <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
+                    Suivant →
+                </button>
+                <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">
+                    Enregistrer ✓
+                </button>
+            </div>
+        </form>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Mission Internationale Lumière du Monde</p>
+            <small>© 2024 MILMO App. All rights reserved.</small>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        const stepTitles = [
+            'Informations Personnelles',
+            'Contact & Localisation',
+            'Informations Complémentaires',
+            'Confirmation'
+        ];
+
+        const stepDescriptions = [
+            'Veuillez renseigner vos informations de base pour commencer votre inscription.',
+            'Veuillez renseigner vos coordonnées et votre localisation pour nous permettre de vous situer.',
+            'Quelques informations supplémentaires pour mieux vous connaître.',
+            'Dernière étape ! Vous pouvez nous laisser une intention de prière avant de finaliser votre inscription.'
+        ];
+
+        function changeStep(direction) {
+            // Validation basique avant de continuer
+            if (direction === 1 && !validateCurrentStep()) {
+                return;
+            }
+
+            // Cacher l'étape actuelle
+            document.getElementById('step' + currentStep).style.display = 'none';
+
+            // Changer l'étape
+            currentStep += direction;
+
+            // Afficher la nouvelle étape
+            document.getElementById('step' + currentStep).style.display = 'block';
+            document.getElementById('step' + currentStep).classList.add('fade-in');
+
+            // Mettre à jour l'interface
+            updateUI();
+        }
+
+        function updateUI() {
+            // Mettre à jour la barre de progression
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('stepTitle').textContent = stepTitles[currentStep - 1];
+            document.getElementById('stepDescription').textContent = stepDescriptions[currentStep - 1];
+
+            // Gérer les boutons
+            document.getElementById('prevBtn').style.display = currentStep === 1 ? 'none' : 'flex';
+            document.getElementById('nextBtn').style.display = currentStep === totalSteps ? 'none' : 'flex';
+            document.getElementById('submitBtn').style.display = currentStep === totalSteps ? 'flex' : 'none';
+
+            // Scroll vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function validateCurrentStep() {
+            const currentStepElement = document.getElementById('step' + currentStep);
+            const inputs = currentStepElement.querySelectorAll('input[required], select[required]');
+            
+            for (let input of inputs) {
+                if (!input.value.trim()) {
+                    input.focus();
+                    input.style.borderColor = '#e74c3c';
+                    setTimeout(() => {
+                        input.style.borderColor = '#e0e0e0';
+                    }, 2000);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Gérer la soumission du formulaire
+        document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collecter les données
+            const formData = new FormData(this);
+            
+            // Animation de succès
+            alert('✅ Inscription réussie ! Bienvenue dans la famille MILMO.');
+            
+            // Redirection ou autre action
+            // window.location.href = 'confirmation.php';
+        });
+
+        // Preview de la photo
+        document.getElementById('photoInput').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const photoCircle = document.querySelector('.photo-circle');
+                    photoCircle.innerHTML = `<img src="${event.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                                            <div class="add-photo-btn">✓</div>`;
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+    </script>
+</body>
+</html>
